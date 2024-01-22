@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from pydantic import Field
 from pydantic.generics import GenericModel
 
-T = TypeVar('T')
+# T = TypeVar('T')
 
 class menu(BaseModel):
     id: Optional[int] = None
@@ -16,13 +16,15 @@ class menu(BaseModel):
 
 class submenu(BaseModel):
     id: Optional[int] = None
-    dishes: List[str] = None
-    dishes_count: Optional[int] = None
+    # dishes: List[str] = List
+    # dishes_count:Optional[int] = None
+    menu_id:Optional[int] = None
 
 class dish(BaseModel):
     id: Optional[int] = None
-    dish: Optional[str] = None
+    dishc: Optional[str] = None
     price: Optional[str] = None
+    submenu_id: Optional[int] = None
 
 # class Request(GenericModel, Generic[T]):
 #     parameter: Optional[T] = Field(...)
