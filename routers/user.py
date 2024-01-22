@@ -8,9 +8,6 @@ from dto import user as UserDTO
 
 router=APIRouter()
 
-# @router.get("/")
-# async def root():
-#     return {"message": "hello world"}
 
 #Dish
 @router.post('/v1/menus//submenus//dishes',tags=["user"])
