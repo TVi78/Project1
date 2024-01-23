@@ -57,6 +57,7 @@ from sqlalchemy.orm import Mapped
 class menu(BaseModel):
     id: int= None
     title: str= None
+    submenus:list["submenu"]
     submenu_count: int = None
     dishes_count: int = None
 
@@ -66,6 +67,10 @@ class menu(BaseModel):
 class submenu(BaseModel):
     id: int= None
     menu_id:int = None
+    dishes:list["dish"]
+    dishes_count: int
+    menu_id: int
+    menus:"menu"
 
 class dish(BaseModel):
     id: int

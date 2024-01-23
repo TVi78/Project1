@@ -5,19 +5,19 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 class menu(Base):
     __tablename__="TableMenu"
     id: Mapped[int]=mapped_column(primary_key=True)
-    # dishc: Mapped[str]
-    # submenus = relationship("submenu", back_populates="menus", cascade="all, delete-orphan")
-    # submenu_count =Mapped[int]
-    # dishes_count =Mapped[int]
+    title: Mapped[str]
+    submenus:Mapped[list["submenu"]] = relationship("submenu", back_populates="menus", cascade="all, delete-orphan")
+    submenu_count =Mapped[int]
+    dishes_count =Mapped[int]
 
 class submenu(Base):
     __tablename__="TableSubmenu"
     id: Mapped[int]=mapped_column(primary_key=True)
-    # dishes:Mapped[list["dish"]] = relationship(
-    #     back_populates="submenudish",)
-    # dishes_count: Mapped[int]
-    # menu_id:Mapped[int]=mapped_column(ForeignKey("TableMenu.id", ondelete="CASCADE"))
-    # menus:Mapped["menu"]=relationship(back_populates="submenus",)
+    dishes:Mapped[list["dish"]] = relationship(
+        back_populates="submenudish",)
+    dishes_count: Mapped[int]
+    menu_id:Mapped[int]=mapped_column(ForeignKey("TableMenu.id", ondelete="CASCADE"))
+    menus:Mapped["menu"]=relationship(back_populates="submenus",)
 
 
 class dish(Base):
@@ -25,8 +25,8 @@ class dish(Base):
     id: Mapped[int]=mapped_column(primary_key=True)
     dishc: Mapped[str]
     price: Mapped[str]
-    submenu_id:Mapped[int]  #=mapped_column(ForeignKey("TableSubmenu.id", ondelete="CASCADE"))
-    submenudishs:Mapped[str] #=relationship(back_populates="dishes",)"submenu"
+    submenu_id:Mapped[int]=mapped_column(ForeignKey("TableSubmenu.id", ondelete="CASCADE"))
+    submenudishs:Mapped["submenu"] =relationship(back_populates="dishes",)
 
 # class menu(Base):
 #     __tablename__="TableMenu"
