@@ -2,7 +2,7 @@ from models.user import menu, submenu, dish
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from dto import user
-import psycopg2
+# import psycopg2
 
 #Dish
 def create_dishes(data:user.dish, db):
