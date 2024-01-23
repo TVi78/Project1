@@ -76,7 +76,11 @@ def update_submenu(data:user.submenu, db, id:int):
     return user
 
 def remove_submenu(db:Session,id:int):
+    db1=db.query(submenu).filter(dish.submenu_id==id).all()
+    for i in db1:
+        remove_dishes(db, i)
     user=db.query(submenu).filter(submenu.id==id).delete()
+
     try:
         db.commit()
         db.refresh(user)
@@ -121,7 +125,11 @@ def update_menu(data:user.menu, db, id:int):
     return user
 
 def remove_menu(db:Session,id:int):
+    db1=db.query(menu).filter(submenu.menu_id==id).all()
+    for i in db1:
+        remove_submenu(db, i)
     user=db.query(menu).filter(menu.id==id).delete()
+
     try:
         db.commit()
         db.refresh(user)
